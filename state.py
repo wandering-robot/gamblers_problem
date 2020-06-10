@@ -78,8 +78,8 @@ class Game:
             plt.savefig(self.get_path(f'iter_{itr}'))
             # plt.show()
 
-    def run(self,iterations):
-        for _ in range(iterations):
+    def run(self,itr=1):
+        for _ in range(itr):
             self.update_state_values()
             self.archive_values()
             self.archive_actions()
@@ -101,6 +101,8 @@ class State(Game):
     def set_reward(self):
         if self.money == self.goal:
             return 1
+        elif self.money == 0:
+            return 0
         else:
             return 0
 
@@ -110,7 +112,7 @@ class State(Game):
 if __name__ == "__main__":
     game = Game()
     game.init_states()
-    game.run(15)
+    game.run(itr=15)
     game.plot_values()
     game.plot_actions()
 
